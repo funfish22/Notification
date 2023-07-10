@@ -1,4 +1,6 @@
-function notifyMe() {
+const btn = document.getElementById('button');
+
+const notifyMe = () => {
     console.log('454545', Notification.permission)
 	if (!("Notification" in window)) {
 		// Check if the browser supports notifications
@@ -6,11 +8,19 @@ function notifyMe() {
 	} else if (Notification.permission === "granted") {
 		// Check whether notification permissions have already been granted;
 		// if so, create a notification
-		const notification = new Notification("我是標題", {
-			body: "我是內容",
-			icon: "./images/icons8-about-375.png",
-			image: "./images/icons8-about-375.png",
-		});
+		
+        const notification = new Notification(`我是標題`, {
+            body: "我是內容",
+            icon: "./images/icons8-about-375.png",
+            image: "./images/icons8-about-375.png",
+            badge: "./images/icons8-about-375.png",
+            // tag: "123456",
+            // renotify: true,
+        });
+        // notification.onclick = function(e) {
+        //     e.preventDefault();
+        //     window.open('http://sample.com./');
+        // }
 		// …
 	} else if (Notification.permission !== "denied" || Notification.permission === "default" || Notification.permission === 'undefined') {
 		// We need to ask the user for permission
@@ -30,4 +40,8 @@ function notifyMe() {
 
 	// At last, if the user has denied notifications, and you
 	// want to be respectful there is no need to bother them anymore.
+}
+
+btn.onclick = () => {
+    notifyMe()
 }
