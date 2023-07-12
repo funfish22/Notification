@@ -8,7 +8,7 @@ const requestPermissionFu = () => {
 	Notification.requestPermission().then((permission) => {
 		console.log("permission", permission);
 		NotificationType[permission].notifyFn();
-	});
+	})
 };
 
 const NotificationType = {
@@ -24,11 +24,18 @@ const NotificationType = {
 		},
 		init: [requestPermissionFu],
 		notifyFn() {
-			const notification = new Notification("我是標題允許通知", {
+			const notification = new Notification("我是標題", {
 				body: "我是內容",
-				icon: "./images/icons8-about-375.png",
-				image: "./images/icons8-about-375.png",
+				icon: "./images/icon.png",
+				image: "./images/image.jpg",
+				tag: 'tag1',
+				renotify: true
 			});
+
+			notification.onclick = (e) => {
+				e.preventDefault();
+				window.open('https://www.google.com/');
+			}
 		},
 	},
 	denied: {
